@@ -95,6 +95,7 @@ class Scanner {
       case '"': string();
         break;
       default:
+      
       if (isDigit(c)) {
         number();
       } 
