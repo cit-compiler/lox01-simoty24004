@@ -132,7 +132,9 @@ class Scanner {
   }
 
   private void string() {
-    while (peek() != '"' && !isAtEnd()) {
+    while (peek() != '\"' && !isAtEnd()) {
+      if (peek() == '\\')
+      advance();
       if (peek() == '\n') line++;
       advance();
     }
@@ -145,7 +147,8 @@ class Scanner {
     advance();
 
     String value = source.substring(start + 1, current - 1);
-    addToken(STRING, value);
+    String newvalue = value.replace("\\\"","\"");
+    addToken(STRING, newvalue);
   }
 
   private boolean match(char expected) {
